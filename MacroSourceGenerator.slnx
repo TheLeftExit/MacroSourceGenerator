@@ -1,6 +1,3 @@
 <Solution>
   <Project Path="HeaderFileParser\HeaderFileParser.csproj" />
-  <Project Path="IncludePathResolver\IncludePathResolver.csproj" />
-  <Project Path="MacroSourceGenerator\MacroSourceGenerator.csproj" Type="Classic C#" />
-  <Project Path="SourceGeneratorTest\SourceGeneratorTest.csproj" Type="Classic C#" />
 </Solution>

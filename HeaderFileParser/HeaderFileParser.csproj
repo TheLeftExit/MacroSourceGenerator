@@ -8,12 +8,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Content Include="..\IncludePaths.txt" Link="IncludePaths.txt">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Microsoft.Build.Locator" Version="1.7.8" />
 		<PackageReference Include="Microsoft.Build" ExcludeAssets="runtime" Version="17.0.0" />
 	</ItemGroup>

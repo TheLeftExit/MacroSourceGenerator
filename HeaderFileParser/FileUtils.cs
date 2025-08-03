@@ -6,12 +6,11 @@
 
 public static class FileUtils
 {
-    private static string[] includeDirectories;
-    static FileUtils()
+    public static void Init(string include)
     {
-        var output = File.ReadAllText("IncludePaths.txt");
-        includeDirectories = output.Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        includeDirectories = include.Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
     }
+    private static string[] includeDirectories;
 
     public static string ReadFile(string fileName, IncludeType type)
     {
