@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
 
+Console.WriteLine("Locating the C/C++ build system...");
+
 var vswherePath = Environment.ExpandEnvironmentVariables(@"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe");
 var vswhereArgs = @"-products * -latest -prerelease -find **\VC\Auxiliary\Build\vcvarsall.bat";
 
@@ -8,7 +10,7 @@ var vswhereStartInfo = new ProcessStartInfo
     FileName = vswherePath,
     Arguments = vswhereArgs,
     RedirectStandardOutput = true,
-};
+}; 
 var vswhereProcess = Process.Start(vswhereStartInfo);
 await vswhereProcess.WaitForExitAsync();
 var vcvarsallPath = await vswhereProcess.StandardOutput.ReadLineAsync(); // just the first line
@@ -37,19 +39,30 @@ var framework =
 #include <windows.h>
 #include <stdlib.h>
 #include <malloc.h>
-#include <memory.h>
+#include <memory.h> 
 #include <tchar.h>
 #include <commctrl.h>
 """;
 
+Console.WriteLine("Processing header files...");
 var processor = new FileProcessor();
 processor.Process(framework);
 var macros = processor.Macros;
+Console.WriteLine($"Processing finished. Macros found: {macros.Length}");
 
-var result = macros
-    .Where(x => x.Name.StartsWith("PAGE_"))
-    .Select(x =>
-    $"{x.Name.Trim()} = {string.Join(' ', x.ValueTokens).TrimEnd('L')},\r\n");
-var resultString = string.Concat(result);
+while (true)
+{
+    Console.Write("Prefix: ");
+    var input = Console.ReadLine();
 
-Console.WriteLine(resultString);
+    var result = macros
+        .Where(x => x.Name.StartsWith(input))
+        .Select(x =>
+        $"public const UINT {x.Name.Trim()} = {string.Join(' ', x.ValueTokens).TrimEnd('L')};\r\n");
+    var resultString = string.Concat(result);
+
+    Console.WriteLine(resultString);
+}
+
+
+

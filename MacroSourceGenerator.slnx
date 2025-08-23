@@ -1,3 +1,6 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="readme.md" />
+  </Folder>
   <Project Path="HeaderFileParser\HeaderFileParser.csproj" />
 </Solution>
